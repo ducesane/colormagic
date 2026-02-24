@@ -23,10 +23,10 @@ export function arrangeColors(colors: string[], arrange: ColorArrange | undefine
 
 export const changeBrightness = (color: string, brightness: number): string => {
   const absBrightness = Math.abs(brightness);
-  return brendColor(color, brightness >= 0 ? '#ffffff' : '#000000', absBrightness);
+  return blendColor(color, brightness >= 0 ? '#ffffff' : '#000000', absBrightness);
 };
 
-export const brendColor = (color1: string, color2: string, ratio: number): string => {
+export const blendColor = (color1: string, color2: string, ratio: number): string => {
   const rgbColors = [hexToRgb(color1), hexToRgb(color2)];
   const hsvColors = [rgbToHsb(rgbColors[0]), rgbToHsb(rgbColors[1])];
   const fixedColors = [hsvColors[0], hsvColors[1]];
@@ -52,7 +52,8 @@ export const brendColor = (color1: string, color2: string, ratio: number): strin
 };
 
 const blendValue = (value1: number, value2: number, ratio: number): number => {
-  return (value1 * (100 - ratio) + value2 * ratio) * 0.01;
+  const safeRatio = Math.min(Math.max(ratio, 0), 100);
+  return (value1 * (100 - safeRatio) + value2 * safeRatio) * 0.01;
 };
 
 export const changeSaturation = (color: string, saturation: number): string => {
@@ -79,13 +80,13 @@ export const changeWarmth = (color: string, warmth: number, colors: string[]): s
     l: lAvg
   };
 
-  return brendColorOverlay(color, rgbToHex(hslToRgb(newCol)), absWarmth);
+  return blendColorOverlay(color, rgbToHex(hslToRgb(newCol)), absWarmth);
 };
 
-export const brendColorOverlay = (color1: string, color2: string, ratio: number): string => {
+export const blendColorOverlay = (color1: string, color2: string, ratio: number): string => {
   const rgbColor1 = hexToRgb(color1);
   const rgbColor2 = hexToRgb(color2);
-  const ratioOne = ratio * 0.01;
+  const ratioOne = Math.min(Math.max(ratio, 0), 100) * 0.01;
   function blendRgbValue(value1: number, value2: number): number {
     const value =
       value1 < 128

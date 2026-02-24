@@ -62,3 +62,17 @@ Please note: This API may be removed or changed at anytime, without warning. Use
 ## <a name="contribute">❤️ Contribute</a>
 
 Feel free to suggest fixes or help with new features!
+
+## Next.js migration scaffold
+
+A React + Next.js + TanStack Query migration scaffold is available in `nextjs/`.
+
+
+## AdSense Revenue Maximization
+
+- Place responsive ad units in high-attention zones (top fold, in-content, and near CTA boundaries).
+- Improve page speed and Core Web Vitals to increase session depth and ad viewability.
+- Tune ad density by device type; mobile and desktop should have separate layout experiments.
+- Run iterative A/B tests on placement and format and keep user experience stable.
+- Track RPM, CTR, viewability, and bounce rate together; optimize for long-term RPM growth.
+
